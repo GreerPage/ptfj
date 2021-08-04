@@ -1,5 +1,7 @@
 # store photo name under certain tag
 
+import os
+
 from .deal_with_json import readjson, writejson
 
 class Tagging():
@@ -21,5 +23,17 @@ class Tagging():
         if not t in self.tags:
             self.create_tag(t)
 
-        self.tags[t].append(f)
+        self.tags[t].append(os.path.abspath(f))
         writejson(self.path, self.file)
+
+    def untag(self, t, f):
+        """Untag a photo"""
+
+        if not t in self.tags:
+            return
+
+        f = os.path.abspath(f)
+
+        if f in self.tags[t]:
+            self.tags[t].remove(f)
+            writejson(self.path, self.file)
