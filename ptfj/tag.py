@@ -1,6 +1,4 @@
 # store photo name under certain tag
-import os 
-import json
 
 from .deal_with_json import readjson, writejson
 
