@@ -45,11 +45,23 @@ def cli():
 
         if args[0] == 'list':
             if tag not in tagging.tags: 
-                error()
+                print(f'Error: {tag}: tag not found')
                 return
             print(listing(file, tag))
         
         else: 
+            if not os.path.isfile(args[0]):
+                print(f'Error: {args[0]}: file not found')
+                return
+
+            if len(args) == 3:
+                if args[2] == 'remove':
+                    print('e')
+                    if tag not in tagging.tags: 
+                        print(f'Error: {tag}: tag not found')
+                        return
+                    tagging.untag(tag, args[0])
+                    
             tagging.tag(tag, args[0])
 
 
