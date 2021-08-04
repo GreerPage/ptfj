@@ -23,7 +23,8 @@ def cli():
     """handles command line input"""
 
     initial()
-    tagging = Tagging(i.json)
+    file = i.json
+    tagging = Tagging(file)
 
     args = sys.argv
     args.pop(0)
@@ -37,6 +38,22 @@ def cli():
         print()
         print('Listing: ptfj list [ TAG ]')
         print('Example: ptfj list sillygeese')  
+        return
+
+    elif len(args) != 1:
+        tag = args[1]
+
+        if tag not in tagging.tags: 
+            error()
+            return
+
+        elif args[0] == 'list':
+            print(listing(file, arg))
+        
+        else: 
+            tagging.tag(tag, file)
+
+
 
 
     
