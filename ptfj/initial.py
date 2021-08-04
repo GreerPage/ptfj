@@ -4,9 +4,20 @@ import sys
 
 from pathlib import Path
 
-def initial():
-    # determine path for ptfj directory
-    home = str(Path.home())
-    p = home + 'Documents' if sys.platform == 'win32' else home
+class Initial():
+    """perform actions necessary for setup"""
 
-    os.mkdir(p)
+    def __init__(self):
+        self.home = str(Path.home())
+        self.p = self.home + 'Documents' if sys.platform == 'win32' else self.home
+
+
+    def initial(self):
+        """Creates ptfj directory"""
+
+        os.mkdir(self.p)
+
+    def has_run(self):
+        """Determine if setup has completed"""
+
+        return os.path.isdir(self.p)
