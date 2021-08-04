@@ -3,7 +3,16 @@ import os
 import sys
 
 from .tag import Tagging
+from .listing import listing
 from .initial import Initial
+
+def initial():
+
+    global i
+    i = Initial()
+
+    if not i.has_run:
+        i.initial()
 
 
 def error():
@@ -12,6 +21,9 @@ def error():
 
 def cli():
     """handles command line input"""
+
+    initial()
+    tagging = Tagging(i.json)
 
     args = sys.argv
     args.pop(0)
