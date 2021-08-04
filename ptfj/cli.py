@@ -41,17 +41,16 @@ def cli():
         return
 
     elif len(args) != 1:
-        tag = args[1]
+        tag = args[1]      
 
-        if tag not in tagging.tags: 
-            error()
-            return
-
-        elif args[0] == 'list':
-            print(listing(file, arg))
+        if args[0] == 'list':
+            if tag not in tagging.tags: 
+                error()
+                return
+            print(listing(file, tag))
         
         else: 
-            tagging.tag(tag, file)
+            tagging.tag(tag, args[0])
 
 
 
